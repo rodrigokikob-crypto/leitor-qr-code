@@ -1,0 +1,221 @@
+:root {
+  --bg-color: #000000;
+  --card-bg: rgba(0, 0, 0, 0.95);
+  --hacker-green: #00ff00;
+  --hacker-dark-green: #003300;
+  --text-color: #00ff00;
+  --border-color: #00ff00;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Share Tech Mono', monospace;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Scanline effect */
+body::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+              linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+#matrixCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.container {
+  width: 100%;
+  max-width: 600px;
+  padding: 1.5rem;
+  position: relative;
+  z-index: 20;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--hacker-green);
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+  padding: 2rem;
+  position: relative;
+  /* Terminal header bar */
+}
+
+.card::before {
+  content: 'root@anonymous ~ ./qrreader.sh';
+  position: absolute;
+  top: -30px;
+  left: 0;
+  width: 100%;
+  background: var(--hacker-green);
+  color: #000;
+  font-family: 'Share Tech Mono', monospace;
+  padding: 5px 10px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  box-sizing: border-box;
+}
+
+header h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--hacker-green);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  text-shadow: 0 0 10px var(--hacker-green);
+}
+
+header p {
+  color: var(--hacker-green);
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1px dashed var(--hacker-green);
+  padding-bottom: 1rem;
+  display: inline-block;
+}
+
+.upload-area {
+  border: 2px dashed var(--hacker-dark-green);
+  background: rgba(0, 20, 0, 0.3);
+  padding: 3rem 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.upload-area:hover,
+.upload-area.dragover {
+  border-color: var(--hacker-green);
+  background: rgba(0, 50, 0, 0.4);
+  box-shadow: inset 0 0 30px rgba(0, 255, 0, 0.1);
+}
+
+.upload-area .icon {
+  color: var(--hacker-dark-green);
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.upload-area:hover .icon {
+  color: var(--hacker-green);
+  filter: drop-shadow(0 0 8px var(--hacker-green));
+  transform: scale(1.1);
+}
+
+.upload-area p {
+  color: var(--hacker-green);
+  font-weight: 500;
+}
+
+.result-container {
+  margin-top: 2rem;
+  border: 1px solid var(--hacker-dark-green);
+  padding: 1rem;
+  background: rgba(0, 20, 0, 0.5);
+}
+
+.result-container h2 {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 1rem;
+  color: var(--hacker-green);
+  margin-bottom: 0.75rem;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.result-box {
+  background: #000;
+  border: 1px solid var(--hacker-green);
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+#resultText {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 1rem;
+  word-break: break-all;
+  text-align: left;
+  color: var(--hacker-green);
+}
+
+.copy-btn {
+  background: #000;
+  border: 1px solid var(--hacker-green);
+  color: var(--hacker-green);
+  padding: 0.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.copy-btn:hover {
+  background: var(--hacker-green);
+  color: #000;
+  box-shadow: 0 0 15px var(--hacker-green);
+}
+
+.secondary-btn {
+  background: #000;
+  border: 1px solid var(--hacker-green);
+  color: var(--hacker-green);
+  padding: 0.75rem 1.5rem;
+  font-family: 'Share Tech Mono', sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.secondary-btn:hover {
+  background: var(--hacker-green);
+  color: #000;
+  box-shadow: 0 0 20px var(--hacker-green);
+}
+
+.error-container {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: rgba(255, 0, 0, 0.1);
+  border: 1px solid #ff0000;
+  color: #ff0000;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+}
